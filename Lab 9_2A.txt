@@ -1,0 +1,151 @@
+package com.mycompany.lab9_2a;
+
+// Amna Atiq
+// This program will make a dice game 
+
+public class Lab9_2A {
+
+    public static void main(String[] args) 
+    {
+       System.out.println("Playing DiceGame_6:");
+        DiceGame_6 game6 = new DiceGame_6();
+        game6.playgame(); 
+        System.out.println(); 
+
+        
+        System.out.println("Playing DiceGame_10:");
+        DiceGame_10 game10 = new DiceGame_10();
+        game10.playgame(); 
+    }
+}
+
+
+
+
+package com.mycompany.lab9_2a;
+
+import java.util.Random;
+
+
+public class DiceGame_6 
+{
+    protected int roll1, roll2, roll3, gamescore;
+    
+    public DiceGame_6()
+    {
+        roll1 = 0;
+        roll2 = 0;
+        roll3 = 0;
+        gamescore = 0;       
+    }
+    public int rand()
+    {
+        Random randnbr = new Random();
+        int number = randnbr.nextInt(5)+1;
+        return number;
+               
+    }
+    public void drawDice()
+    {
+        System.out.println("-------    -------      -------");
+        System.out.println("|     |    |     |      |      |");
+        System.out.println("|  "+ roll1+"  |    |  "+ roll2 + "  |      |  "+ roll3+"   |");
+        System.out.println("|     |    |     |      |      |");
+        System.out.println("-------    -------      -------");
+        
+    }
+    public void playgame()
+    {
+        while(true)
+        {
+        roll1 = rand();
+        roll2 = rand();
+        roll3 = rand();
+        
+        drawDice();
+        
+        if(roll1 == roll2 && roll2 == roll3)
+        {
+            System.out.println("All dices are the same. PLAYER WON!");
+        break;
+        }
+        else if(roll1 == roll2 || roll2 == roll3 || roll1 == roll3)
+        {
+            gamescore+=5;
+        break;
+        }
+        else if(gamescore>=20)
+        {
+            System.out.println("PLAYER WON!");
+        break;
+        }
+        else if(roll1 < roll2 && roll2 < roll3)
+        {
+            System.out.println("PLAYER LOST :(");
+            break;
+        }
+        
+            System.out.println("Game Score: "+ gamescore);
+            System.out.println();
+        }
+                   
+    }           
+       
+}
+
+
+
+
+package com.mycompany.lab9_2a;
+
+import java.util.Random;
+
+public class DiceGame_10 extends DiceGame_6 
+{
+    @Override 
+    public int rand()
+    {
+        Random newnbr = new Random();
+        int newrand = newnbr.nextInt(10)+1;
+        return newrand;
+        
+    }
+    @Override 
+    public void playgame()
+    {
+        while(true)
+        {
+        roll1 = rand();
+        roll2 = rand();
+        roll3 = rand();
+        
+        drawDice();
+        
+        if((roll1 %5== 0)&&(roll2 % 5 == 0)&&(roll3 % 5 == 0))
+        {
+            System.out.println("All dices are divisible by 5. PLAYER WON!");
+        break;
+        }
+        else if((roll1 > 5) && (roll2 > 5) && (roll3 > 5))
+        {
+            System.out.println("PLAYER LOST :(");
+        break;
+        }
+        else if ((roll1%5 == 0 && roll2% 5 ==0) || (roll2%5 == 0 && roll3% 5 ==0)||(roll1%5 == 0 && roll3% 5 ==0))
+        {
+            gamescore+=5;
+        }
+        else if(gamescore>=15)
+        {
+            System.out.println("PLAYER WON!");
+        break;
+        }
+       
+        
+            System.out.println("Game Score: "+ gamescore);
+            System.out.println();
+        }
+                   
+    }
+    
+}
